@@ -1,0 +1,175 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>JS Task 6</title>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
+    <style>
+        body {
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            height: 100vh;
+            background-color: #fafafa;
+            font-family: Arial, sans-serif;
+        }
+
+        .login-container {
+            background-color: white;
+            border: 1px solid #dbdbdb;
+            padding: 20px;
+            width: 300px;
+            box-shadow: 0px 0px 10px rgba(0, 0, 0, 0.1);
+        }
+
+        .login-container h1 {
+            font-family: 'Billabong', cursive;
+            font-size: 50px;
+            text-align: center;
+        }
+
+        .input-container {
+            display: flex;
+            align-items: center;
+            border: 1px solid #dbdbdb;
+            border-radius: 3px;
+            margin: 5px 0;
+            padding: 5px;
+        }
+
+        .input-container i {
+            margin-right: 10px;
+            color: #4D5159;
+        }
+
+        .input-container input {
+            border: none;
+            width: 100%;
+            outline: none;
+        }
+
+        .login-container button {
+            width: 100%;
+            padding: 10px;
+            background-color: #3897f0;
+            border: none;
+            border-radius: 3px;
+            color: white;
+            font-weight: bold;
+            cursor: pointer;
+            margin: 10px 0;
+        }
+
+        .login-container .error {
+            color: red;
+            font-size: 12px;
+            margin: 5px 0;
+        }
+
+        .login-container .options {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            font-size: 12px;
+        }
+
+        .login-container .options a {
+            color: #00376b;
+            text-decoration: none;
+        }
+
+        .login-container .signup {
+            text-align: center;
+            font-size: 12px;
+            margin-top: 10px;
+        }
+
+        .login-container .signup a {
+            color: #00376b;
+            text-decoration: none;
+            font-weight: bold;
+        }
+
+        #pass {
+            font-size: 11px;
+            color: red;
+        }
+    </style>
+</head>
+
+<body>
+    <div class="login-container">
+        <h1>Instagram</h1>
+        <form id="loginForm" onsubmit="return validateForm()">
+            <div class="input-container">
+                <i class="fa fa-user" style="font-size:15px"></i>
+                <input type="text" id="username" placeholder="Username">
+            </div>
+            <div class="error" id="usernameError"></div>
+            <div class="input-container">
+                <i class="fa fa-lock" style="font-size:15px"></i>
+                <input type="password" id="password" placeholder="Password ">
+            </div>
+            <p id="pass">Password must be a mix of uppercase letters, lowercase letters, numbers and special characters.
+            </p>
+            <div class="error" id="passwordError"></div>
+            <button type="submit">Log in</button>
+            <div class="options">
+                <label><input type="checkbox"> Remember me</label>
+                <a href="#">Forgot Password?</a>
+            </div>
+        </form>
+        <hr>
+        <div class="signup">
+            Don't have an account? <a href="#">Sign up here.</a>
+        </div>
+    </div>
+
+    <script>
+        function validateForm() {
+            let isValid = true;
+            document.querySelectorAll('.error').forEach(el => el.innerText = '');
+            document.querySelectorAll('input').forEach(el => el.classList.remove('error-border'));
+            const username = document.getElementById('username').value.trim();
+            if (!username) {
+                document.getElementById('usernameError').innerText = 'This field is required';
+                document.getElementById('username').classList.add('error-border');
+                isValid = false;
+            }
+            const password = document.getElementById('password').value.trim();
+            const upperCasePattern = /[A-Z]/;
+            const numberPattern = /\d/;
+            const specialCharPattern = /[!@#$%^&*(),.?":{}|<>]/;  // Added special character pattern
+            if (!password) {
+                document.getElementById('passwordError').innerText = 'This field is required';
+                document.getElementById('password').classList.add('error-border');
+                isValid = false;
+            } else {
+                if (!upperCasePattern.test(password)) {
+                    document.getElementById('passwordError').innerText = 'At least one uppercase letter is required';
+                    document.getElementById('password').classList.add('error-border');
+                    isValid = false;
+                }
+                if (!numberPattern.test(password)) {
+                    document.getElementById('passwordError').innerText = 'At least one number is required';
+                    document.getElementById('password').classList.add('error-border');
+                    isValid = false;
+                }
+                if (!specialCharPattern.test(password)) {  // Check for special character
+                    document.getElementById('passwordError').innerText = 'At least one special character is required';
+                    document.getElementById('password').classList.add('error-border');
+                    isValid = false;
+                }
+            }
+            if (isValid) {
+                alert('Logged in successfully!');
+            }
+            return isValid;
+        }
+    </script>
+
+</body>
+
+</html>

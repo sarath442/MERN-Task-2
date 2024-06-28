@@ -1,0 +1,50 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>JS Task 4</title>
+    <style>
+        #box {
+            text-align: center;
+            margin-top: 20%;
+        }
+
+        button {
+            display: block;
+            margin: 10px auto;
+            padding: 10px;
+            font-size: 16px;
+        }
+
+        p {
+            font-size: 18px;
+        }
+    </style>
+</head>
+
+<body>
+    <div id="box">
+        <button onclick="showDate()">Show Date</button>
+        <p id="date"></p>
+        <button onclick="showTime()">Show Time</button>
+        <p id="time"></p>
+    </div>
+
+    <script>
+        function showDate() {
+            const date = new Date();
+            const formattedDate = `${date.getDate()}/${date.toLocaleString('default', { month: 'long' })}/${date.getFullYear()}`;
+            document.getElementById('date').textContent = formattedDate;
+        }
+
+        function showTime() {
+            const date = new Date();
+            const formattedTime = date.toString();
+            document.getElementById('time').textContent = formattedTime;
+        }
+    </script>
+</body>
+
+</html>
